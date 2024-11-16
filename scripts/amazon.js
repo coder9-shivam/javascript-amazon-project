@@ -1,5 +1,6 @@
 let productsHTML = '';  // This is Accumulator pattern
 
+// Loop the products and This is the HTML Element code show on the web page writen in Javascript file
 products.forEach((products) => {
   productsHTML += `
     <div class="product-container">
