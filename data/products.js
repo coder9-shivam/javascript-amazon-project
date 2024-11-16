@@ -657,4 +657,4 @@ const products = [
       "mens"
     ]
   }
-];
+];  // This is a data structure
