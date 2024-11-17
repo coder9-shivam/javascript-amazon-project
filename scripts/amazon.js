@@ -1,3 +1,6 @@
+import { cart } from '../data/cart.js';
+import { products } from '../data/products.js';
+
 let productsHTML = '';  // This is Accumulator pattern
 
 // Loop the products and This is the HTML Element code show on the web page writen in Javascript file
