@@ -32,7 +32,7 @@ cart.forEach((cartItem) => {
   let deliveryOption;
 
   deliveryOptions.forEach((option) => {
-    if (option.id === deliveryOptionId) {
+    if(option.id === deliveryOptionId){
       deliveryOption = option;
     }
   });
@@ -42,6 +42,7 @@ cart.forEach((cartItem) => {
     deliveryOption.deliveryDays, 'days'
   );
   const dateString = deliveryDate.format('dddd, MMMM D');
+
 
   cartSummaryHTML += `
   <div class="cart-item-container 
@@ -81,7 +82,6 @@ cart.forEach((cartItem) => {
         </div>
         ${deliveryOptionsHTML(matchingProduct, cartItem)}
       </div>
-
     </div>
   </div>
   `;
