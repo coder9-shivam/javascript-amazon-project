@@ -1,15 +1,11 @@
 import { cart, removeFromCart, updateDeliveryOption } from "../../data/cart.js";
-import { products, getProduct } from "../../data/products.js";
+import { getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import { hello } from "https://unpkg.com/supersimpledev@1.0.1/hello.esm.js";  // Naming Export
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";  //default Export
 import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.js";
+import { renderPaymentSummary } from "./paymentSummary.js";
 
-hello();
-
-const today = dayjs();
-const deliveryDate = today.add(7, 'days');
-console.log(deliveryDate.format('dddd D, MMMM'));
 
 
 export function renderOrderSummary() {
@@ -56,7 +52,7 @@ export function renderOrderSummary() {
             <span class="update-quantity-link link-primary">
               Update
             </span>
-            <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${matchingProduct.id}">
+            <span class="delete-qu  antity-link link-primary js-delete-link" data-product-id="${matchingProduct.id}">
               Delete
             </span>
           </div>
@@ -117,6 +113,7 @@ export function renderOrderSummary() {
   document.querySelector('.js-order-summary')
     .innerHTML = cartSummaryHTML
 
+
   document.querySelectorAll('.js-delete-link')
     .forEach((link) => {
       link.addEventListener('click', () => {
@@ -126,7 +123,10 @@ export function renderOrderSummary() {
         const container = document.querySelector(
           `.js-cart-item-container-${productId}`
         );
+
         container.remove();
+
+        renderPaymentSummary();
       });
     });
 
@@ -136,6 +136,7 @@ export function renderOrderSummary() {
         const { productId, deliveryOptionId } = element.dataset;
         updateDeliveryOption(productId, deliveryOptionId);
         renderOrderSummary();  // Recursion
+        renderPaymentSummary();
       });
     });
 }
