@@ -81,8 +81,9 @@ export function renderOrderSummary() {
       );
       const dateString = deliveryDate.format('dddd, MMMM D');
 
-      const priceString = deliveryOption.priceCents === 0 ?
-        'FREE' : `$${formatCurrency(deliveryOption.priceCents)}`;
+      const priceString = deliveryOption.priceCents === 0 
+        ? 'FREE' 
+        : `$${formatCurrency(deliveryOption.priceCents)}`;
 
       const isChecked = deliveryOption.id === cartItem.deliveryOptionId;
 
@@ -120,11 +121,7 @@ export function renderOrderSummary() {
         const productId = link.dataset.productId;
         removeFromCart(productId);
 
-        const container = document.querySelector(
-          `.js-cart-item-container-${productId}`
-        );
-
-        container.remove();
+        renderOrderSummary();
 
         renderPaymentSummary();
       });
