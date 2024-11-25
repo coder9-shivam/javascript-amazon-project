@@ -17,7 +17,6 @@ describe('test suite: formatCurrency', () => {
     expect(formatCurrency(2000.4)).toEqual('20.00');
   });
 
-  console.log(formatCurrency(-2200.5));
   it('negative number', () => {
     expect(formatCurrency(-2200.5)).toEqual('-22.00');
   });
