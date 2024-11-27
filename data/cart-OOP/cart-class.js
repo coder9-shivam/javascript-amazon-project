@@ -1,7 +1,7 @@
-import { validDeliveryOption } from './deliveryOptions.js'
+import { validDeliveryOption } from '../deliveryOptions.js'
 
 
-class Cart {
+export class Cart {
   cartItems;    // Public property and it can be access anywhere
   #localStorageKey;   // Private property and it can't be access without # in front of the varible and it is only accessble in Class;
 
