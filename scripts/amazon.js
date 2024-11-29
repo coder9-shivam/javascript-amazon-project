@@ -5,28 +5,28 @@ import { formatCurrency } from './utils/money.js';
 let productsHTML = '';  // This is Accumulator pattern
 
 // Loop the products and This is the HTML Element code show on the web page writen in Javascript file
-products.forEach((products) => {
+products.forEach((product) => {
   productsHTML += `
     <div class="product-container">
       <div class="product-image-container">
         <img class="product-image"
-          src="${products.image}">
+          src="${product.image}">
       </div>
 
       <div class="product-name limit-text-to-2-lines">
-        ${products.name};
+        ${product.name};
       </div>
 
       <div class="product-rating-container">
         <img class="product-rating-stars"
-          src="images/ratings/rating-${products.rating.stars * 10}.png">
+          src="${product.getStarsUrl()}">
         <div class="product-rating-count link-primary">
-          ${products.rating.count}
+          ${product.rating.count}
         </div>
       </div>
 
       <div class="product-price">
-        $${formatCurrency(products.priceCents)}
+        ${product.getPrice()}
       </div>
 
       <div class="product-quantity-container">
@@ -46,13 +46,13 @@ products.forEach((products) => {
 
       <div class="product-spacer"></div>
 
-      <div class="added-to-cart js-added-to-txt-${products.id}">
+      <div class="added-to-cart js-added-to-txt-${product.id}">
         <img src="images/icons/checkmark.png">
         Added
       </div>
 
       <button class="add-to-cart-button button-primary js-add-to-cart"
-      data-product-id="${products.id}">
+      data-product-id="${product.id}">
         Add to Cart
       </button>
     </div>

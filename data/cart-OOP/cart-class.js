@@ -109,7 +109,7 @@ export class Cart {
 
 }
 
-const cart = new Cart('cart-oop');
+const cart = new Cart('cart-oop');   // new:- Generate the new object
 const businessCart = new Cart('cart-business');
 
 console.log(cart);
