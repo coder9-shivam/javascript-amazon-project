@@ -1,12 +1,15 @@
 import { cart, addToCart } from '../data/cart.js';
-import { products } from '../data/products.js';
+import { products, loadProducts } from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
 
-let productsHTML = '';  // This is Accumulator pattern
+loadProducts(renderProductsGrid);
 
-// Loop the products and This is the HTML Element code show on the web page writen in Javascript file
-products.forEach((product) => {
-  productsHTML += `
+function renderProductsGrid() {
+  let productsHTML = '';  // This is Accumulator pattern
+
+  // Loop the products and This is the HTML Element code show on the web page writen in Javascript file
+  products.forEach((product) => {
+    productsHTML += `
     <div class="product-container">
       <div class="product-image-container">
         <img class="product-image"
@@ -59,46 +62,47 @@ products.forEach((product) => {
       </button>
     </div>
   `;
-});
-
-// Show the HTML Element on the web page
-document.querySelector('.js-product-grid')
-  .innerHTML = productsHTML;
-
-function updateCartQuantity(){
-  // Calculate the quantity
-  let cartQuantity = 0;
-  cart.forEach((cartItem) => {
-    cartQuantity += cartItem.quantity;
   });
 
-  // Put the quantity on the page.
-  document.querySelector('.js-cart-quantity')
-    .innerHTML = cartQuantity;
-}
+  // Show the HTML Element on the web page
+  document.querySelector('.js-product-grid')
+    .innerHTML = productsHTML;
 
-// Interactive the Add To Cart Button
-const addedMessageTimeouts = {};
-document.querySelectorAll('.js-add-to-cart')
-  .forEach((button) => {
-    button.addEventListener('click', () => {
-      const { productId } = button.dataset;
-
-      const addedMessage = document.querySelector(`.js-added-to-txt-${productId}`);
-
-      addedMessage.classList.add('added-to-cart-visible');
-      setTimeout(() => {
-        const previousTimeoutId = addedMessageTimeouts[productId];
-        if(previousTimeoutId){
-          clearTimeout(previousTimeoutId);
-        }
-
-        const timeoutId = setTimeout(() => {
-          addedMessage.classList.remove('added-to-cart-visible');
-        });
-      }, 2000);
-
-      addToCart(productId);
-      updateCartQuantity();
+  function updateCartQuantity() {
+    // Calculate the quantity
+    let cartQuantity = 0;
+    cart.forEach((cartItem) => {
+      cartQuantity += cartItem.quantity;
     });
-  });
+
+    // Put the quantity on the page.
+    document.querySelector('.js-cart-quantity')
+      .innerHTML = cartQuantity;
+  }
+
+  // Interactive the Add To Cart Button
+  const addedMessageTimeouts = {};
+  document.querySelectorAll('.js-add-to-cart')
+    .forEach((button) => {
+      button.addEventListener('click', () => {
+        const { productId } = button.dataset;
+
+        const addedMessage = document.querySelector(`.js-added-to-txt-${productId}`);
+
+        addedMessage.classList.add('added-to-cart-visible');
+        setTimeout(() => {
+          const previousTimeoutId = addedMessageTimeouts[productId];
+          if (previousTimeoutId) {
+            clearTimeout(previousTimeoutId);
+          }
+
+          const timeoutId = setTimeout(() => {
+            addedMessage.classList.remove('added-to-cart-visible');
+          });
+        }, 2000);
+
+        addToCart(productId);
+        updateCartQuantity();
+      });
+    });
+}
